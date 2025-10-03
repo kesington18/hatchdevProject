@@ -1,16 +1,16 @@
 "use client";
 import React from 'react'
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 // import { useEffect } from 'react';
 
-interface RegisterData {
+export interface RegisterData {
     firstName: string;
     lastName: string;
     email: string;
     age: number;
     password: string;
-    confirmPassword: string;
+    confirmPassword?: string;
 }
 
 export const SignUp = () => {
@@ -25,14 +25,22 @@ export const SignUp = () => {
         reset 
     } = useForm<RegisterData>()
     
-    const onSubmit: SubmitHandler<RegisterData> = data => {
+    const onSubmit: SubmitHandler<RegisterData> = (data) => {
         console.log(data)
-        localStorage.setItem('regsiter', JSON.stringify(data))
-        reset()
-        router.push("/signIn")
+
+        const { confirmPassword, ...userData} = data;
+
+        const existingUsers: RegisterData[] = JSON.parse(localStorage.getItem("register") || "[]");
+
+        existingUsers.push(userData);
+
+        localStorage.setItem("register", JSON.stringify(existingUsers));
+        reset();
+
+        router.push("/todo/signin");
     }
 
-  return <div className=''>
+  return <div className='flex min-h-full flex-col justify-center px-6 py-12 lg:px-8'>
     <h2>Registration form</h2>
 
     <div>
@@ -53,7 +61,7 @@ export const SignUp = () => {
             </div>
 
             <div>
-                <label htmlFor="lastName">First Name</label>
+                <label htmlFor="lastName">Last Name</label>
                 <input type="text" placeholder='please enter your Last Name' {
                     ...register("lastName", {
                         validate: (val) => {
@@ -68,7 +76,7 @@ export const SignUp = () => {
             </div>
 
             <div>
-                <label htmlFor="email">First Name</label>
+                <label htmlFor="email">Email</label>
                 <input type="email" placeholder='please enter your email address' {
                     ...register("email", {
                         validate: (val) => {
@@ -83,7 +91,7 @@ export const SignUp = () => {
             </div>
 
             <div>
-                <label htmlFor="age">First Name</label>
+                <label htmlFor="age">Age</label>
                 <input type="number" placeholder='please enter your age' {
                     ...register("age", {
                         validate: (val) => {
@@ -97,7 +105,7 @@ export const SignUp = () => {
             </div>
 
             <div>
-                <label htmlFor="password">First Name</label>
+                <label htmlFor="password">Password</label>
                 <input type="password" placeholder='please enter your password' {
                     ...register("password", {
                         required: "Password is required",
@@ -113,7 +121,7 @@ export const SignUp = () => {
             </div>
 
             <div>
-                <label htmlFor="password">First Name</label>
+                <label htmlFor="password">Confirm Password</label>
                 <input
                 type="password"
                 placeholder="please Confirm Password"
