@@ -31,13 +31,20 @@ export const SignUp = () => {
         const { confirmPassword, ...userData} = data;
 
         const existingUsers: RegisterData[] = JSON.parse(localStorage.getItem("register") || "[]");
+        
+        const user = existingUsers.find(user => user.email === userData.email)
 
-        existingUsers.push(userData);
+        if (user) {
+            alert("user details already existing");
+        } else {
 
-        localStorage.setItem("register", JSON.stringify(existingUsers));
-        reset();
-
-        router.push("/todo/signin");
+            existingUsers.push(userData);
+    
+            localStorage.setItem("register", JSON.stringify(existingUsers));
+            reset();
+    
+            router.push("/todo/signin");
+        }
     }
 
   return <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8 border">
