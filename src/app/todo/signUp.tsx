@@ -40,13 +40,13 @@ export const SignUp = () => {
         router.push("/todo/signin");
     }
 
-  return <div className='flex min-h-full flex-col justify-center px-6 py-12 lg:px-8'>
-    <h2>Registration form</h2>
+  return <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8 border">
+    <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-black">Sign in to your account</h2>
 
-    <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+    <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
+        <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
             <div>
-                <label htmlFor="firstName">First Name</label>
+                <label htmlFor="firstName" className="block text-lg/6 font-medium text-gray-900">First Name</label>
                 <input type="text" placeholder='please enter your First Name' {
                     ...register("firstName", {
                         validate: (val) => {
@@ -56,12 +56,12 @@ export const SignUp = () => {
                         }
                     }) 
 
-                }/>
+                } className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 mt-2"/>
                 <p className="text-red-600">{errors.firstName?.message}</p>
             </div>
 
             <div>
-                <label htmlFor="lastName">Last Name</label>
+                <label htmlFor="lastName" className="block text-lg/6 font-medium text-gray-900">Last Name</label>
                 <input type="text" placeholder='please enter your Last Name' {
                     ...register("lastName", {
                         validate: (val) => {
@@ -71,12 +71,12 @@ export const SignUp = () => {
                         }
                     }) 
 
-                }/>
+                } className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 mt-2"/>
                 <p className="text-red-600">{errors.lastName?.message}</p>
             </div>
 
             <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email" className="block text-lg/6 font-medium text-gray-900">Email</label>
                 <input type="email" placeholder='please enter your email address' {
                     ...register("email", {
                         validate: (val) => {
@@ -86,12 +86,12 @@ export const SignUp = () => {
                         }
                     }) 
 
-                }/>
+                } className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 mt-2"/>
                 <p className="text-red-600">{errors.email?.message}</p>
             </div>
 
             <div>
-                <label htmlFor="age">Age</label>
+                <label htmlFor="age" className="block text-lg/6 font-medium text-gray-900">Age</label>
                 <input type="number" placeholder='please enter your age' {
                     ...register("age", {
                         validate: (val) => {
@@ -100,12 +100,12 @@ export const SignUp = () => {
                             }
                         }
                     }) 
-                }/>
+                } className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 mt-2"/>
                 <p className="text-red-600">{errors.age?.message}</p>
             </div>
 
             <div>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" className="block text-lg/6 font-medium text-gray-900">Password</label>
                 <input type="password" placeholder='please enter your password' {
                     ...register("password", {
                         required: "Password is required",
@@ -115,13 +115,13 @@ export const SignUp = () => {
                             "Password must be at least 8 chars, include uppercase, lowercase and a number",
                         }
                     }) 
-                }/>
+                } className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"/>
 
                 <p className="text-red-600">{errors.password?.message}</p>
             </div>
 
             <div>
-                <label htmlFor="password">Confirm Password</label>
+                <label htmlFor="password" className="block text-lg/6 font-medium text-gray-900">Confirm Password</label>
                 <input
                 type="password"
                 placeholder="please Confirm Password"
@@ -130,7 +130,7 @@ export const SignUp = () => {
                     validate: (val) =>
                         val === watch("password") || "Passwords do not match",
                 })}
-                />
+                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"/>
                 <p className="text-red-600">{errors.confirmPassword?.message}</p>
             </div>
 
